@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         binding.foregroundService.setOnClickListener {
             ContextCompat.startForegroundService(this, MyForegroundService.newIntent(this))
         }
+        binding.intentService.setOnClickListener {
+            ContextCompat.startForegroundService(this, MyIntentService.newIntent(this))
+        }
     }
 
     private fun askPermission() {
