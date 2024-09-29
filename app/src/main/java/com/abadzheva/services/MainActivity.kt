@@ -1,6 +1,7 @@
 package com.abadzheva.services
 
 import android.Manifest
+import android.R
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.app.job.JobWorkItem
@@ -8,12 +9,14 @@ import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.abadzheva.services.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -25,6 +28,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val window = window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.holo_blue_dark)
+
         askPermission()
         binding.simpleService.setOnClickListener {
             stopService(MyForegroundService.newIntent(this))
